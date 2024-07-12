@@ -297,7 +297,9 @@ class DirectMixin:
         cursor = inbox.get("oldest_cursor")
         return threads, cursor
 
-    def direct_thread(self, thread_id: int, amount: int = 20) -> DirectThread:
+    def direct_thread(
+        self, thread_id: int, amount: int = 20, oldest_cursor: Optional[str] = None
+    ) -> DirectThread:
         """
         Get all the information about a Direct Message thread
 
@@ -321,7 +323,7 @@ class DirectMixin:
             "seq_id": "40065",  # 59663
             "limit": "20",
         }
-        cursor = None
+        cursor = oldest_cursor
         items = []
         while True:
             if cursor:
